@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nigus Labs</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" defer></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Particle Canvas -->
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+<header>
+    <h1 id="brand">Nigus Labs</h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#apps">Apps</a>
+        <a href="#about">About</a>
+        <a href="#announcements">Announcements</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <h2 class="hero-text">Nigus Labs</h2>
+        <p>Explore Every Inch of All Projects</p>
+    </section>
+
+    <!-- Apps -->
+    <section class="apps" id="apps">
+        <article class="app-card fade-in slide-bounce">
+            <img src="https://via.placeholder.com/300x180.png?text=Ascend" alt="Ascend App Preview">
+            <div class="info">
+                <h3>Ascend</h3>
+                <a href="#" class="download-btn">Download <i class="fas fa-download"></i></a>
+                <div class="expanded-content">
+                    <div class="screenshots">
+                        <img src="https://via.placeholder.com/200x120.png?text=Screen+1" alt="Ascend Screen 1">
+                        <img src="https://via.placeholder.com/200x120.png?text=Screen+2" alt="Ascend Screen 2">
+                        <img src="https://via.placeholder.com/200x120.png?text=Screen+3" alt="Ascend Screen 3">
+                    </div>
+                    <p>Ascend helps track habits, set reminders, and analyze productivity.</p>
+                </div>
+            </div>
+        </article>
+
+        <article class="app-card fade-in slide-bounce">
+            <img src="https://via.placeholder.com/300x180.png?text=Storm+Pip" alt="Storm Pip App Preview">
+            <div class="info">
+                <h3>Storm Pip</h3>
+                <a href="#" class="download-btn">Download <i class="fas fa-download"></i></a>
+                <div class="expanded-content">
+                    <div class="screenshots">
+                        <img src="https://via.placeholder.com/200x120.png?text=Screen+1" alt="Storm Pip Screen 1">
+                        <img src="https://via.placeholder.com/200x120.png?text=Screen+2" alt="Storm Pip Screen 2">
+                        <img src="https://via.placeholder.com/200x120.png?text=Screen+3" alt="Storm Pip Screen 3">
+                    </div>
+                    <p>Storm Pip sends real-time crypto alerts and notifications.</p>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <p>Hi! I'm Aaron, a fresh graduate and developer showcasing my projects.</p>
+    </section>
+
+    <!-- Announcements -->
+    <section class="announcements" id="announcements">
+        <div class="announcement-card fade-in slide-bounce">
+            <h3>New Release</h3>
+            <p>Ascend v2.0 is now live with dark mode and tracking features!</p>
+        </div>
+        <div class="announcement-card fade-in slide-bounce">
+            <h3>Upcoming Project</h3>
+            <p>Stay tuned for a brand new app dropping next month</p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <form class="contact-form fade-in slide-bounce">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit">Send <i class="fas fa-paper-plane"></i></button>
+        </form>
+        <div class="socials fade-in">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </section>
+</main>
+
+<footer>&copy; 2025 Nigus Labs. All Rights Reserved.</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
