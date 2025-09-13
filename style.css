@@ -1,14 +1,13 @@
 /* ================= Base Variables ================= */
 :root {
   --bg: #0d0d0d;
-  --panel: rgba(0, 100, 255, 0.15); /* semi-transparent cards */
+  --panel: rgba(0, 100, 255, 0.15);
   --accent: #00c0ff;
   --accent-2: #66e0ff;
   --text: #fff;
   --radius: 12px;
   --transition: 0.3s ease;
-  --app-collapsed: 250px;
-  --app-expanded: 550px;
+  --hero-shadow: 0 0 20px rgba(0, 192, 255, 0.7), 0 0 40px rgba(102, 224, 255, 0.5);
 }
 
 /* ================= Reset / Base ================= */
@@ -34,14 +33,20 @@ header {
   backdrop-filter: blur(6px);
   z-index: 100;
 }
-#brand { color: var(--accent); font-weight: 700; letter-spacing: 1px; }
+#brand {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px var(--accent), 0 0 15px var(--accent-2);
+}
 nav a {
   margin-left: 1rem;
   color: var(--text);
   text-decoration: none;
-  transition: color var(--transition);
+  transition: color var(--transition), transform var(--transition);
 }
-nav a:hover { color: var(--accent); }
+nav a:hover { color: var(--accent); transform: scale(1.05); }
 
 /* ================= Hero ================= */
 .hero {
@@ -51,19 +56,33 @@ nav a:hover { color: var(--accent); }
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 0 1rem;
 }
 .hero-text {
   font-size: 3rem;
   font-weight: 700;
   color: var(--accent);
-  text-shadow: 0 0 5px var(--accent), 0 0 15px var(--accent-2);
+  text-shadow: var(--hero-shadow);
+  animation: neonPulse 2.5s infinite alternate;
+}
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin-top: 1rem;
+  line-height: 1.6;
+  color: #cceeff;
+}
+@keyframes neonPulse {
+  0% { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-2); }
+  50% { text-shadow: 0 0 20px var(--accent-2), 0 0 40px var(--accent); }
+  100% { text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent-2); }
 }
 
 /* ================= Apps ================= */
 .apps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -74,56 +93,84 @@ nav a:hover { color: var(--accent); }
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-  transition: transform 0.35s ease, box-shadow 0.35s ease, height 0.35s ease;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  height: var(--app-collapsed);
-}
-.app-card img { width: 100%; height: 180px; object-fit: cover; }
-.app-card .info {
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
+  filter: grayscale(20%);
 }
-.app-card .info h3 { color: var(--accent); }
+.app-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 192, 255, 0.35);
+  filter: grayscale(0%);
+}
+.app-card .info h3 {
+  color: var(--accent);
+  font-size: 1.6rem;
+  text-shadow: 0 0 5px var(--accent), 0 0 10px var(--accent-2);
+  text-align: center;
+}
+.app-card .info .description {
+  font-size: 1rem;
+  color: #cceeff;
+  line-height: 1.5;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+/* ================= Screenshot Carousel ================= */
+.screenshots-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  scroll-behavior: smooth;
+  padding-bottom: 10px; /* optional for spacing */
+}
+
+.screenshots-container::-webkit-scrollbar {
+  display: none; /* hide scrollbar */
+}
+
+.screenshots {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.screenshots img {
+  flex: 0 0 auto; /* prevent shrinking */
+  width: 200px; /* adjust as needed */
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,192,255,0.25);
+  cursor: grab;
+  transition: transform 0.3s ease;
+}
+
+.screenshots img:active {
+  cursor: grabbing;
+}
+
+/* ================= Download Button ================= */
 .download-btn {
   background: var(--accent);
   color: #000;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
   font-weight: 600;
-  transition: transform var(--transition);
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+  align-self: center;
+  box-shadow: 0 3px 10px rgba(0,192,255,0.3);
 }
 .download-btn:hover {
-  transform: scale(1.02);
+  transform: scale(1.05) translateY(-2px);
   background: var(--accent-2);
-}
-
-/* Expanded content */
-.expanded-content {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.45s ease;
-}
-.app-card.expanded .expanded-content {
-  opacity: 1;
-  max-height: 400px;
-}
-.expanded-content .screenshots {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 0.5rem;
-}
-.expanded-content .screenshots img {
-  width: 48%;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 4px 15px rgba(0, 192, 255, 0.15);
+  box-shadow: 0 6px 20px rgba(0,192,255,0.5);
 }
 
 /* ================= About / Announcements / Contact ================= */
@@ -132,27 +179,40 @@ nav a:hover { color: var(--accent); }
   text-align: center;
   z-index: 1;
 }
-.about h2, .announcements h2 { color: var(--accent); }
+.about h2, .announcements h2 { color: var(--accent); font-size: 2rem; text-shadow: 0 0 8px var(--accent); }
+.about p, .announcements p {
+  font-size: 1.1rem;
+  max-width: 750px;
+  margin: 0.75rem auto;
+  line-height: 1.7;
+  color: #cceeff;
+}
 .announcement-card {
-  background: rgba(0, 192, 255, 0.1);
+  background: rgba(0,192,255,0.1);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1rem 1.5rem;
   margin: 1rem auto;
   max-width: 680px;
+  transition: transform var(--transition), box-shadow var(--transition);
 }
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 520px;
-  margin: 0 auto;
+.announcement-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,192,255,0.25);
 }
+
+/* ================= Contact ================= */
+.contact-form { display: flex; flex-direction: column; gap: 12px; max-width: 520px; margin: 0 auto; }
 .contact-form input, .contact-form textarea {
   padding: 12px;
   border-radius: 8px;
   border: 1px solid rgba(0,192,255,0.25);
   background: rgba(255,255,255,0.04);
   color: var(--text);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+.contact-form input:focus, .contact-form textarea:focus {
+  border: 1px solid var(--accent-2);
+  box-shadow: 0 0 12px var(--accent-2);
 }
 .contact-form button {
   padding: 12px;
@@ -161,24 +221,17 @@ nav a:hover { color: var(--accent); }
   background: var(--accent);
   font-weight: 700;
   cursor: pointer;
-  transition: transform var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 .contact-form button:hover {
-  transform: translateY(-3px);
+  transform: translateY(-3px) scale(1.02);
   box-shadow: 0 6px 20px rgba(0,192,255,0.2);
 }
-.socials {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 1rem;
-}
-.socials a {
-  color: var(--accent);
-  font-size: 1.5rem;
-  transition: transform var(--transition);
-}
-.socials a:hover { transform: scale(1.15); color: #fff; }
+
+/* ================= Socials ================= */
+.socials { display: flex; justify-content: center; gap: 14px; margin-top: 1rem; }
+.socials a { color: var(--accent); font-size: 1.5rem; transition: transform var(--transition), color var(--transition); }
+.socials a:hover { transform: scale(1.2); color: #fff; }
 
 /* ================= Scroll Reveal ================= */
 .fade-in { opacity: 0; transition: all 0.5s ease; }
@@ -187,14 +240,11 @@ nav a:hover { color: var(--accent); }
 .slide-bounce.show { opacity: 1; transform: translateY(0); }
 
 /* ================= Footer ================= */
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  color: #777;
-}
+footer { text-align: center; padding: 1.5rem; color: #777; font-size: 0.95rem; }
 
 /* ================= Responsive ================= */
 @media (max-width: 900px) {
   .hero-text { font-size: 2.2rem; }
-  .expanded-content .screenshots img { width: 100%; }
+  .screenshots { gap: 8px; }
+  .screenshot { min-width: 180px; }
 }
