@@ -31,7 +31,125 @@ document.addEventListener("DOMContentLoaded", function() {
 
   faders.forEach(f => observer.observe(f));
   slideBounce.forEach(f => observer.observe(f));
+
+  // Initialize slideshows
+  initSlideshows();
+  
+  // Initialize glitch effect
+  initGlitchEffect();
+  
+  // Initialize enhanced navigation
+  initEnhancedNavigation();
 });
+
+// ================= Glitch Effect =================
+function initGlitchEffect() {
+  const glitchText = document.querySelector('.glitch-text');
+  if (!glitchText) return;
+  
+  let isNigus = true;
+  let lastChange = Date.now();
+  const changeInterval = 3000; // Change every 3 seconds
+  
+  function updateGlitch() {
+    const now = Date.now();
+    if (now - lastChange >= changeInterval) {
+      isNigus = !isNigus;
+      glitchText.textContent = isNigus ? 'Nigus' : 'ንጉስ';
+      glitchText.setAttribute('data-text', isNigus ? 'Nigus' : 'ንጉስ');
+      lastChange = now;
+    }
+    requestAnimationFrame(updateGlitch);
+  }
+  
+  updateGlitch();
+}
+
+// ================= Enhanced Navigation =================
+function initEnhancedNavigation() {
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      link.style.transform = 'translateY(-2px)';
+      link.style.boxShadow = '0 4px 8px rgba(0, 192, 255, 0.3)';
+    });
+    
+    link.addEventListener('mouseleave', () => {
+      link.style.transform = '';
+      link.style.boxShadow = '';
+    });
+  });
+}
+
+// ================= Slideshow Functionality =================
+function initSlideshows() {
+  const slideshows = document.querySelectorAll('.fade-slideshow');
+  
+  slideshows.forEach(slideshow => {
+    const slides = slideshow.querySelectorAll('.slide');
+    const dotsContainer = slideshow.nextElementSibling;
+    let currentSlide = 0;
+    
+    // Create dots
+    for (let i = 0; i < slides.length; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.dataset.index = i;
+      dotsContainer.appendChild(dot);
+    }
+    
+    const dots = dotsContainer.querySelectorAll('.dot');
+    
+    // Function to show a specific slide
+    function showSlide(index) {
+      // Hide all slides
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Show the selected slide
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+      
+      currentSlide = index;
+    }
+    
+    // Add click events to dots
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const index = parseInt(dot.dataset.index);
+        showSlide(index);
+        resetTimer();
+      });
+    });
+    
+    // Function to move to next slide
+    function nextSlide() {
+      let next = currentSlide + 1;
+      if (next >= slides.length) next = 0;
+      showSlide(next);
+    }
+    
+    // Auto advance slides
+    let slideInterval = setInterval(nextSlide, 4000);
+    
+    // Reset timer on user interaction
+    function resetTimer() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 4000);
+    }
+    
+    // Pause on hover
+    slideshow.addEventListener('mouseenter', () => {
+      clearInterval(slideInterval);
+    });
+    
+    slideshow.addEventListener('mouseleave', () => {
+      slideInterval = setInterval(nextSlide, 4000);
+    });
+  });
+}
 
 // ================= Particle Background =================
 const canvas = document.getElementById('particle-canvas');
@@ -88,7 +206,7 @@ class Particle {
 
     // Apply speeds + scroll effect
     this.x += this.speedX;
-    this.y += this.speedY + scrollOffset * 0.002; // <-- scroll movement added
+    this.y += this.speedY + scrollOffset * 0.002;
 
     // Return to base
     this.speedX += (this.baseX - this.x)*0.002;
@@ -178,3 +296,75 @@ function drawGrid() {
   requestAnimationFrame(drawGrid);
 }
 drawGrid();
+document.addEventListener("DOMContentLoaded", () => {
+  /* ========== Hero Glitch Text Transition ========== */
+  const glitchText = document.querySelector(".glitch-text");
+  const words = ["Future", "Now"];
+  let i = 0;
+
+  function swapWord() {
+    glitchText.classList.add("glitching");
+    setTimeout(() => {
+      i = (i + 1) % words.length;
+      glitchText.textContent = words[i];
+      glitchText.classList.remove("glitching");
+    }, 600);
+  }
+  setInterval(swapWord, 3500);
+
+  /* ========== App Screenshot Slideshow ========== */
+  document.querySelectorAll(".fade-slideshow").forEach(slideshow => {
+    const slides = slideshow.querySelectorAll(".slide");
+    const dots = slideshow.nextElementSibling.querySelectorAll(".dot");
+    let idx = 0;
+
+    function showSlide(n) {
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === n));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === n));
+    }
+    function nextSlide() {
+      idx = (idx + 1) % slides.length;
+      showSlide(idx);
+    }
+    showSlide(idx);
+    setInterval(nextSlide, 4000);
+    dots.forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        idx = i;
+        showSlide(i);
+      });
+    });
+  });
+
+  /* ========== Scroll Reveal ========== */
+  const revealEls = document.querySelectorAll(".fade-in, .slide-bounce");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ========== Nav Glow Ripple Effect ========== */
+  const navLinks = document.querySelectorAll("nav a");
+  navLinks.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const ripple = document.createElement("span");
+      ripple.className = "ripple";
+      ripple.style.left = e.offsetX + "px";
+      ripple.style.top = e.offsetY + "px";
+      link.appendChild(ripple);
+
+      setTimeout(() => ripple.remove(), 700);
+
+      const target = document.querySelector(link.getAttribute("href"));
+      if (target) {
+        window.scrollTo({
+          top: target.offsetTop - 60,
+          behavior: "smooth"
+        });
+      }
+    });
+  });
+});
