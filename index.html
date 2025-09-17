@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nigus Lab</title>
+    <title>Nigus Labs</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Particle Canvas -->
     <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
     <header>
         <h1 id="brand">Nigus Lab</h1>
-        <nav>
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="nav">
             <a href="#home" class="nav-link">Home</a>
             <a href="#apps" class="nav-link">Apps</a>
             <a href="#about" class="nav-link">About</a>
@@ -24,16 +28,13 @@
     </header>
 
     <main>
-        <!-- Hero -->
         <section class="hero" id="home">
             <h2 class="hero-text glitch-text" data-text="Nigus">Nigus</h2>
             <p class="hero-subtitle">Where Ideas Meet Code. Every App, Polished. Every Pixel, Thoughtful.</p>
-            <p>From sleek productivity tools to smart, intuitive apps — everything is designed for efficiency, clarity, and a touch of innovation.</p>
+            <p>From sleek productivity tools to smart, intuitive apps—everything is designed for efficiency, clarity, and a touch of innovation.</p>
         </section>
 
-        <!-- Apps -->
         <section class="apps" id="apps">
-            <!-- Ascend App Card -->
             <article class="app-card fade-in slide-bounce">
                 <div class="info">
                     <h3>Ascend</h3>
@@ -43,16 +44,16 @@
                     <div class="screenshot-container">
                         <div class="fade-slideshow">
                             <div class="slide active">
-                                <img src="assets/screenshots/1.jpg" alt="Ascend Screen 1">
+                                <img src="https://via.placeholder.com/300x600/003366/ffffff?text=Ascend+1" alt="Ascend Screen 1">
                             </div>
                             <div class="slide">
-                                <img src="assets/screenshots/two.jpg" alt="Ascend Screen 2">
+                                <img src="https://via.placeholder.com/300x600/004477/ffffff?text=Ascend+2" alt="Ascend Screen 2">
                             </div>
                             <div class="slide">
-                                <img src="assets/screenshots/three.jpg" alt="Ascend Screen 3">
+                                <img src="https://via.placeholder.com/300x600/005588/ffffff?text=Ascend+3" alt="Ascend Screen 3">
                             </div>
                             <div class="slide">
-                                <img src="assets/screenshots/four.jpg" alt="Ascend Screen 4">
+                                <img src="https://via.placeholder.com/300x600/006699/ffffff?text=Ascend+4" alt="Ascend Screen 4">
                             </div>
                         </div>
                         <div class="slide-dots"></div>
@@ -61,7 +62,6 @@
                 </div>
             </article>
 
-            <!-- Storm Pip App Card -->
             <article class="app-card fade-in slide-bounce">
                 <div class="info">
                     <h3>Storm Pip</h3>
@@ -90,26 +90,23 @@
             </article>
         </section>
 
-        <!-- About -->
         <section class="about" id="about">
             <h2>About Me</h2>
-            <p>Hey, I'm Aaron — a fresh graduate, coder, and problem-solver. I turn ideas into polished apps that are functional, intuitive, and visually engaging.</p>
+            <p>Hey, I'm Aaron—a fresh graduate, coder, and problem-solver. I turn ideas into polished apps that are functional, intuitive, and visually engaging.</p>
             <p>At Nigus Lab, every line of code counts. Every interface is crafted for clarity. My mission? Build apps that people actually enjoy using, while pushing tech boundaries one project at a time.</p>
         </section>
 
-        <!-- Announcements -->
         <section class="announcements" id="announcements">
             <div class="announcement-card fade-in slide-bounce">
                 <h3>New Release</h3>
-                <p>Ascend v2.0 is live! Dark mode, smarter reminders, better tracking — all designed to boost your daily productivity. Upgrade now and level up your routines.</p>
+                <p>Ascend v2.0 is live! Dark mode, smarter reminders, and better tracking—all designed to boost your daily productivity. Upgrade now and level up your routines.</p>
             </div>
             <div class="announcement-card fade-in slide-bounce">
                 <h3>Coming Soon</h3>
-                <p>Next-gen app dropping soon. Built for speed, clarity, and simplicity. Stay tuned for a smarter way to tackle everyday tasks.</p>
+                <p>The next-gen app is dropping soon. Built for speed, clarity, and simplicity. Stay tuned for a smarter way to tackle everyday tasks.</p>
             </div>
         </section>
 
-        <!-- Contact -->
         <section class="contact" id="contact">
             <form class="contact-form fade-in slide-bounce">
                 <input type="text" placeholder="Your Name" required>
